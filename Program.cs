@@ -199,17 +199,32 @@ namespace Tic_Tac_Toe
         private static void start_game() 
         {
            // Declare a single-dimensional array of 5 integers.
-           int[,] array = new int[3, 3];
-         
-            Console.WriteLine("START");
-            
-            Console.WriteLine("Player X's turn:");
-            
-            Console.WriteLine(" | | ");
-            Console.WriteLine("-+-+-");
-            Console.WriteLine(" | | ");
-            Console.WriteLine("-+-+-");
-            Console.WriteLine(" | | ");
+           int[,] board = new int[3, 3];
+           
+
+           Console.WriteLine("START");
+
+
+            for (int i = 0; i < 100; i++)
+            {
+                Console.WriteLine("Player X's turn:");
+                string xTurn1 = Console.ReadLine();
+                int xTurnConv1 = Convert.ToInt32(xTurn1);    
+                string xTurn2 = Console.ReadLine();
+                int xTurnConv2 = Convert.ToInt32(xTurn2);
+
+                if (xTurnConv1 == 1 && xTurnConv2 == 1)
+                {
+                    board[0, 0] == 'X';
+                }
+
+                Console.WriteLine(" | | ");
+                Console.WriteLine("-+-+-");
+                Console.WriteLine(" | | ");
+                Console.WriteLine("-+-+-");
+                Console.WriteLine(" | | ");
+            }
+        
             
             
             
