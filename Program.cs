@@ -173,65 +173,97 @@ using System;
 
 namespace Tic_Tac_Toe
 {
-    internal class Program
+    internal static class Program
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Start game");
-            Console.WriteLine("Exit game");
+            Console.WriteLine("[1] Start game");
+            Console.WriteLine("[2] Exit game");
             Console.WriteLine("----------");
             string userInput = Console.ReadLine();
             int userInputConv = Convert.ToInt32(userInput);                                                             // Converting to integer type
-
-
             
-            if (userInputConv == 1)
-                start_game();
-            else if (userInputConv == 2)
-                exit_game();
 
+            switch (userInputConv)
+            {
+                case 1:
+                    start_game();
+                    break;
+                case 2:
+                    exit_game();
+                    break;
+            }
         }
         
         
         
         
         
-        private static void start_game() 
+        private static void start_game()
         {
-           // Declare a single-dimensional array of 5 integers.
-           int[,] board = new int[3, 3];
-           
-
-           Console.WriteLine("START");
-
+            // Declare a single-dimensional array of 5 integers.
+            char[,] board = new char[3, 3];
+            
+            int[] xTurn = new int[2]; 
+            int j;
 
             for (int i = 0; i < 100; i++)
             {
-                Console.WriteLine("Player X's turn:");
-                string xTurn1 = Console.ReadLine();
-                int xTurnConv1 = Convert.ToInt32(xTurn1);    
-                string xTurn2 = Console.ReadLine();
-                int xTurnConv2 = Convert.ToInt32(xTurn2);
+                Console.WriteLine("\n");
+                Console.WriteLine("{0} | {1} | {2}", board[0, 0], board[0, 1], board[0, 2]);
+                Console.WriteLine("--+--+--");
+                Console.WriteLine("{0} | {1} | {2}", board[1, 0], board[1, 1], board[1, 2]);
+                Console.WriteLine("--+--+--");
+                Console.WriteLine("{0} | {1} | {2}", board[2, 0], board[2, 1], board[2, 2]);
 
-                if (xTurnConv1 == 1 && xTurnConv2 == 1)
+                playerX(xTurn);
+
+                switch (xTurn[0])
                 {
-                    board[0, 0] == 'X';
+                    // ROW 1
+                    case 0 when xTurn[1] == 0:
+                        board[0, 0] = 'X';
+                        break;
+                    case 0 when xTurn[1] == 1:
+                        board[0, 1] = 'X';
+                        break;
+                    case 0 when xTurn[1] == 2:
+                        board[0, 2] = 'X';
+                        break;
+                    // ROW 2
+                    case 1 when xTurn[1] == 0:
+                        board[1, 0] = 'X';
+                        break;
+                    case 1 when xTurn[1] == 1:
+                        board[1, 1] = 'X';
+                        break;
+                    case 1 when xTurn[1] == 2:
+                        board[1, 2] = 'X';
+                        break;
+                    // ROW 3
+                    case 2 when xTurn[1] == 0:
+                        board[2, 0] = 'X';
+                        break;
+                    case 2 when xTurn[1] == 1:
+                        board[2, 1] = 'X';
+                        break;
+                    case 2 when xTurn[1] == 2:
+                        board[2, 2] = 'X';
+                        break;
                 }
-
-                Console.WriteLine(" | | ");
-                Console.WriteLine("-+-+-");
-                Console.WriteLine(" | | ");
-                Console.WriteLine("-+-+-");
-                Console.WriteLine(" | | ");
             }
-        
-            
-            
-            
- 
-            Console.WriteLine("Player 0's turn:");
-            
         }
+
+        
+        private static void playerX(int[] xTurn)
+        {
+            Console.Write("\n\n-- Player X's turn:   ");
+            for (int j = 0; j < 2; j++) 
+                xTurn[j] = Convert.ToInt32(Console.ReadLine());
+        }
+
+        
+        
         
         private static void exit_game() 
         {
