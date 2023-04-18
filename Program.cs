@@ -107,7 +107,7 @@ namespace Tic_Tac_Toe
                     Console.WriteLine(playerXwins);
                     return;
                 }
-                else if ((board[2, 0] == 'X') && (board[2, 1] == 'X') && (board[2, 2] == 'X'))
+                else if ((r2c0 == 'X') && (r2c1 == 'X') && (r2c2 == 'X'))
                 {
                     Console.WriteLine(playerXwins);
                     return;
