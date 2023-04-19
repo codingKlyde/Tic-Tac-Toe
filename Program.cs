@@ -12,8 +12,7 @@ namespace Tic_Tac_Toe
         {
             Console.Write("[y/n] Start game?   ");
             char userInput = Console.ReadKey().KeyChar;
-
-
+            
 
             if (userInput == 'y')
                 StartGame();
@@ -27,16 +26,15 @@ namespace Tic_Tac_Toe
         
         private static void StartGame()
         {
-            int z = 15;
-            
             char[,] board = new char[3, 3];
             char r0c0 = board[0, 0], r0c1 = board[0, 1], r0c2 = board[0, 2];
             char r1c0 = board[1, 0], r1c1 = board[1, 1], r1c2 = board[1, 2];
             char r2c0 = board[2, 0], r2c1 = board[2, 1], r2c2 = board[2, 2];
 
-            string playerXwins = "\n-- Player X wins!";
+            const string xWinMessage = "\n\n-- Player X wins!";
+            const string oWinMessage = "\n\n-- Player O wins!";
 
-            
+            const int z = 15;
             
             
             while (z <= 15)
@@ -85,61 +83,71 @@ namespace Tic_Tac_Toe
                     case 2 when o2 == 1: r2c1 = 'O'; break;
                     case 2 when o2 == 2: r2c2 = 'O'; break;
                 }
-                
-                
-                Console.WriteLine("\n");
-                Console.WriteLine("{0} | {1} | {2}", r0c0, r0c1, r0c2);
-                Console.WriteLine("--+---+--");
-                Console.WriteLine("{0} | {1} | {2}", r1c0, r1c1, r1c2);
-                Console.WriteLine("--+---+--");
-                Console.WriteLine("{0} | {1} | {2}", r2c0, r2c1, r2c1);
+
+
+                Board(r0c0, r0c1, r0c2, r1c0, r1c1, r1c2, r2c0, r2c1, r2c2);
 
 
                 // Player X win conditions
                 // Horizontal
                 if ((r0c0 == 'X') && (r0c1 == 'X') && (r0c2 == 'X'))
                 {
-                    Console.WriteLine(playerXwins);
+                    Console.WriteLine(xWinMessage);
                     return;
                 }
-                else if ((r1c0 == 'X') && (board[1, 1] == 'X') && (board[1, 2] == 'X'))
+                else if ((r1c0 == 'X') && (r1c1 == 'X') && (r1c2 == 'X'))
                 {
-                    Console.WriteLine(playerXwins);
+                    Console.WriteLine(xWinMessage);
                     return;
                 }
                 else if ((r2c0 == 'X') && (r2c1 == 'X') && (r2c2 == 'X'))
                 {
-                    Console.WriteLine(playerXwins);
+                    Console.WriteLine(xWinMessage);
                     return;
                 }
                 // Vertical
-                else if ((board[0, 0] == 'X') && (board[1, 0] == 'X') && (board[2, 0] == 'X'))
+                else if ((r0c0 == 'X') && (r1c0 == 'X') && (r2c0 == 'X'))
                 {
-                    Console.WriteLine(playerXwins);
+                    Console.WriteLine(xWinMessage);
                     return;
                 }
-                else if ((board[0, 1] == 'X') && (board[1, 1] == 'X') && (board[2, 1] == 'X'))
+                else if ((r0c1 == 'X') && (r1c1 == 'X') && (r2c1 == 'X'))
                 {
-                    Console.WriteLine(playerXwins);
+                    Console.WriteLine(xWinMessage);
                     return;
                 }
-                else if ((board[0, 2] == 'X') && (board[1, 2] == 'X') && (board[2, 2] == 'X'))
+                else if ((r0c2 == 'X') && (r1c2 == 'X') && (r2c2 == 'X'))
                 {
-                    Console.WriteLine(playerXwins);
+                    Console.WriteLine(xWinMessage);
                     return;
                 }
                 // Diagonal
-                else if ((board[0, 0] == 'X') && (board[1, 1] == 'X') && (board[2, 2] == 'X') ||  (board[2, 2] == 'X') && (board[1, 1] == 'X') && (board[0, 0] == 'X'))
+                else if ((r0c0 == 'X') && (r1c1 == 'X') && (r2c2 == 'X') ||  (r2c2 == 'X') && (r1c1 == 'X') && (r0c0 == 'X'))
                 {
-                    Console.WriteLine(playerXwins);
+                    Console.WriteLine(xWinMessage);
                     return;
                 }
-                else if ((board[0, 2] == 'X') && (board[1, 1] == 'X') && (board[2, 0] == 'X') || (board[2, 0] == 'X') && (board[1, 1] == 'X') && (board[0, 2] == 'X'))
+                else if ((r0c2 == 'X') && (r1c1 == 'X') && (r2c0 == 'X') || (r2c0 == 'X') && (r1c1 == 'X') && (r0c2 == 'X'))
                 {
-                    Console.WriteLine(playerXwins);
+                    Console.WriteLine(xWinMessage);
                     return;
                 }
             }
+        }
+
+        
+        
+        
+
+        // BOARD
+        private static void Board(char r0c0, char r0c1, char r0c2, char r1c0, char r1c1, char r1c2, char r2c0, char r2c1, char r2c2)
+        {
+            Console.WriteLine("\n");
+            Console.WriteLine("{0} | {1} | {2}", r0c0, r0c1, r0c2);
+            Console.WriteLine("--+---+--");
+            Console.WriteLine("{0} | {1} | {2}", r1c0, r1c1, r1c2);
+            Console.WriteLine("--+---+--");
+            Console.WriteLine("{0} | {1} | {2}", r2c0, r2c1, r2c2);
         }
     }
 }
