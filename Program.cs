@@ -39,10 +39,9 @@ namespace Tic_Tac_Toe
             
             while (z <= 15)
             {
-                Console.Write("\n\n-- Player X's turn:   ");
-                string[] xInput = Console.ReadLine().Split(' ');
-                int x1 = int.Parse (xInput[0]);
-                int x2 = int.Parse (xInput[1]);
+                int x1, x2, o1, o2;
+                
+                PlayerX(out x1, out x2);
                 
 
                 switch (x1)
@@ -60,13 +59,10 @@ namespace Tic_Tac_Toe
                     case 2 when x2 == 1: r2c1 = 'X'; break;
                     case 2 when x2 == 2: r2c2 = 'X'; break;
                 }
-                
-                
-                Console.Write("\n\n-- Player O's turn:   ");
-                string[] oInput = Console.ReadLine().Split(' ');
-                int o1 = int.Parse (oInput[0]);
-                int o2 = int.Parse (oInput[1]);
-                
+
+
+                PlayerO(out o1, out o2);
+                 
                 
                 switch (o1)
                 {
@@ -143,11 +139,31 @@ namespace Tic_Tac_Toe
         private static void Board(char r0c0, char r0c1, char r0c2, char r1c0, char r1c1, char r1c2, char r2c0, char r2c1, char r2c2)
         {
             Console.WriteLine("\n");
-            Console.WriteLine("{0} | {1} | {2}", r0c0, r0c1, r0c2);
+            Console.WriteLine($"{r0c0} | {r0c1} | {r0c2}");
             Console.WriteLine("--+---+--");
-            Console.WriteLine("{0} | {1} | {2}", r1c0, r1c1, r1c2);
+            Console.WriteLine($"{r1c0} | {r1c1} | {r1c2}");
             Console.WriteLine("--+---+--");
-            Console.WriteLine("{0} | {1} | {2}", r2c0, r2c1, r2c2);
+            Console.WriteLine($"{r2c0} | {r2c1} | {r2c2}");
+        }
+
+
+
+
+
+        private static void PlayerX(out int x1, out int x2)
+        {
+            Console.Write("\n\n-- Player X's turn:   ");
+            string[] xInput = Console.ReadLine().Split(' ');
+            x1 = int.Parse(xInput[0]);
+            x2 = int.Parse(xInput[1]);
+        }
+        
+        private static void PlayerO(out int o1, out int o2)
+        {
+            Console.Write("\n\n-- Player O's turn:   ");
+            string[] oInput = Console.ReadLine().Split(' ');
+            o1 = int.Parse(oInput[0]);
+            o2 = int.Parse(oInput[1]);
         }
     }
 }
