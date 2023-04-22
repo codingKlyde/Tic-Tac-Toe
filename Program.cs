@@ -27,9 +27,6 @@ namespace Tic_Tac_Toe
         private static void StartGame()
         {
             char[,] board = new char[3, 3];
-            char r0c0 = board[0, 0], r0c1 = board[0, 1], r0c2 = board[0, 2];
-            char r1c0 = board[1, 0], r1c1 = board[1, 1], r1c2 = board[1, 2];
-            char r2c0 = board[2, 0], r2c1 = board[2, 1], r2c2 = board[2, 2];
 
             const string xWinMessage = "\n\n-- Player X wins!";
             const string oWinMessage = "\n\n-- Player O wins!";
@@ -47,17 +44,17 @@ namespace Tic_Tac_Toe
                 switch (x1)
                 {
                     // ROW 1
-                    case 0 when x2 == 0: r0c0 = 'X'; break;
-                    case 0 when x2 == 1: r0c1 = 'X'; break;
-                    case 0 when x2 == 2: r0c2 = 'X'; break;
+                    case 0 when x2 == 0: board[0, 0] = 'X'; break;
+                    case 0 when x2 == 1: board[0, 1] = 'X'; break;
+                    case 0 when x2 == 2: board[0, 2] = 'X'; break;
                     // ROW 2
-                    case 1 when x2 == 0: r1c0 = 'X'; break;
-                    case 1 when x2 == 1: r1c1 = 'X'; break;
-                    case 1 when x2 == 2: r1c2 = 'X'; break;
+                    case 1 when x2 == 0: board[1, 0] = 'X'; break;
+                    case 1 when x2 == 1: board[1, 1] = 'X'; break;
+                    case 1 when x2 == 2: board[1, 2] = 'X'; break;
                     // ROW 3
-                    case 2 when x2 == 0: r2c0 = 'X'; break;
-                    case 2 when x2 == 1: r2c1 = 'X'; break;
-                    case 2 when x2 == 2: r2c2 = 'X'; break;
+                    case 2 when x2 == 0: board[2, 0] = 'X'; break;
+                    case 2 when x2 == 1: board[2, 1] = 'X'; break;
+                    case 2 when x2 == 2: board[2, 2] = 'X'; break;
                 }
 
 
@@ -67,63 +64,63 @@ namespace Tic_Tac_Toe
                 switch (o1)
                 {
                     // ROW 1
-                    case 0 when o2 == 0: r0c0 = 'O'; break;
-                    case 0 when o2 == 1: r0c1 = 'O'; break;
-                    case 0 when o2 == 2: r0c2 = 'O'; break;
+                    case 0 when o2 == 0: board[0, 0] = 'O'; break;
+                    case 0 when o2 == 1: board[0, 1] = 'O'; break;
+                    case 0 when o2 == 2: board[0, 2] = 'O'; break;
                     // ROW 2
-                    case 1 when o2 == 0: r1c0 = 'O'; break;
-                    case 1 when o2 == 1: r1c1 = 'O'; break;
-                    case 1 when o2 == 2: r1c2 = 'O'; break;
+                    case 1 when o2 == 0: board[1, 0] = 'O'; break;
+                    case 1 when o2 == 1: board[1, 1] = 'O'; break;
+                    case 1 when o2 == 2: board[1, 2] = 'O'; break;
                     // ROW 3
-                    case 2 when o2 == 0: r2c0 = 'O'; break;
-                    case 2 when o2 == 1: r2c1 = 'O'; break;
-                    case 2 when o2 == 2: r2c2 = 'O'; break;
+                    case 2 when o2 == 0: board[2, 0] = 'O'; break;
+                    case 2 when o2 == 1: board[2, 1] = 'O'; break;
+                    case 2 when o2 == 2: board[2, 2] = 'O'; break;
                 }
 
 
-                Board(r0c0, r0c1, r0c2, r1c0, r1c1, r1c2, r2c0, r2c1, r2c2);
+                Board(board);
 
 
                 // Player X win conditions
                 // Horizontal
-                if ((r0c0 == 'X') && (r0c1 == 'X') && (r0c2 == 'X'))
+                if ((board[0, 0] == 'X') && (board[0, 1] == 'X') && (board[0, 2] == 'X'))
                 {
                     Console.WriteLine(xWinMessage);
                     return;
                 }
-                else if ((r1c0 == 'X') && (r1c1 == 'X') && (r1c2 == 'X'))
+                else if ((board[1, 0] == 'X') && (board[1, 1] == 'X') && (board[1, 2] == 'X'))
                 {
                     Console.WriteLine(xWinMessage);
                     return;
                 }
-                else if ((r2c0 == 'X') && (r2c1 == 'X') && (r2c2 == 'X'))
+                else if ((board[2, 0] == 'X') && (board[2, 1] == 'X') && (board[2, 2] == 'X'))
                 {
                     Console.WriteLine(xWinMessage);
                     return;
                 }
                 // Vertical
-                else if ((r0c0 == 'X') && (r1c0 == 'X') && (r2c0 == 'X'))
+                else if ((board[0, 0] == 'X') && (board[1, 0] == 'X') && (board[2, 0] == 'X'))
                 {
                     Console.WriteLine(xWinMessage);
                     return;
                 }
-                else if ((r0c1 == 'X') && (r1c1 == 'X') && (r2c1 == 'X'))
+                else if ((board[0, 1] == 'X') && (board[1, 1] == 'X') && (board[2, 1] == 'X'))
                 {
                     Console.WriteLine(xWinMessage);
                     return;
                 }
-                else if ((r0c2 == 'X') && (r1c2 == 'X') && (r2c2 == 'X'))
+                else if ((board[0, 2] == 'X') && (board[1, 2] == 'X') && (board[2, 2] == 'X'))
                 {
                     Console.WriteLine(xWinMessage);
                     return;
                 }
                 // Diagonal
-                else if ((r0c0 == 'X') && (r1c1 == 'X') && (r2c2 == 'X') ||  (r2c2 == 'X') && (r1c1 == 'X') && (r0c0 == 'X'))
+                else if ((board[0, 0] == 'X') && (board[1, 1] == 'X') && (board[2, 2] == 'X') ||  (board[2, 2] == 'X') && (board[1, 1] == 'X') && (board[0, 0] == 'X'))
                 {
                     Console.WriteLine(xWinMessage);
                     return;
                 }
-                else if ((r0c2 == 'X') && (r1c1 == 'X') && (r2c0 == 'X') || (r2c0 == 'X') && (r1c1 == 'X') && (r0c2 == 'X'))
+                else if ((board[0, 2] == 'X') && (board[1, 1] == 'X') && (board[2, 0] == 'X') || (board[2, 0] == 'X') && (board[1, 1] == 'X') && (board[0, 2] == 'X'))
                 {
                     Console.WriteLine(xWinMessage);
                     return;
@@ -134,22 +131,7 @@ namespace Tic_Tac_Toe
         
         
         
-
-        // BOARD
-        private static void Board(char r0c0, char r0c1, char r0c2, char r1c0, char r1c1, char r1c2, char r2c0, char r2c1, char r2c2)
-        {
-            Console.WriteLine("\n");
-            Console.WriteLine($"{r0c0} | {r0c1} | {r0c2}");
-            Console.WriteLine("--+---+--");
-            Console.WriteLine($"{r1c0} | {r1c1} | {r1c2}");
-            Console.WriteLine("--+---+--");
-            Console.WriteLine($"{r2c0} | {r2c1} | {r2c2}");
-        }
-
-
-
-
-
+        
         private static void PlayerX(out int x1, out int x2)
         {
             Console.Write("\n\n-- Player X's turn:   ");
@@ -157,13 +139,28 @@ namespace Tic_Tac_Toe
             x1 = int.Parse(xInput[0]);
             x2 = int.Parse(xInput[1]);
         }
-        
+
         private static void PlayerO(out int o1, out int o2)
         {
             Console.Write("\n\n-- Player O's turn:   ");
             string[] oInput = Console.ReadLine().Split(' ');
             o1 = int.Parse(oInput[0]);
             o2 = int.Parse(oInput[1]);
+        }
+        
+        
+        
+        
+
+        // BOARD
+        private static void Board(char[,] board)
+        {
+            Console.WriteLine("\n");
+            Console.WriteLine($"{board[0, 0]} | {board[0, 1]} | {board[0, 2]}");
+            Console.WriteLine("--+---+--");
+            Console.WriteLine($"{board[1, 0]} | {board[1, 1]} | {board[1, 2]}");
+            Console.WriteLine("--+---+--");
+            Console.WriteLine($"{board[2, 0]} | {board[2, 1]} | {board[2, 2]}");
         }
     }
 }
