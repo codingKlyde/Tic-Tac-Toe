@@ -10,14 +10,17 @@ namespace Tic_Tac_Toe
     {
         public static void Main(string[] args)
         {
+            Console.WriteLine($"{"*** TIC-TAC-TOE ***\n", -30}", Console.ForegroundColor = ConsoleColor.Blue);
+            Console.ResetColor();
+            
+            
             Console.Write("[y/n] Start game?   ");
             char userInput = Console.ReadKey().KeyChar;
             
-
             if (userInput == 'y')
                 StartGame();
             else
-                return;
+                Console.WriteLine("\n\n BYE");
         }
         
         
@@ -31,15 +34,15 @@ namespace Tic_Tac_Toe
             const string xWinMessage = "\n\n-- Player X wins!";
             const string oWinMessage = "\n\n-- Player O wins!";
 
-            const int z = 15;
+            const int z = 0;
             
             
-            while (z <= 15)
+            while (z <= 20)
             {
-                int x1, x2, o1, o2;
+                Board(board);
                 
-                PlayerX(out x1, out x2);
                 
+                PlayerX(out int x1, out int x2, board, xWinMessage);
 
                 switch (x1)
                 {
@@ -58,9 +61,8 @@ namespace Tic_Tac_Toe
                 }
 
 
-                PlayerO(out o1, out o2);
-                 
-                
+                PlayerO(out int o1, out int o2, board, oWinMessage);
+
                 switch (o1)
                 {
                     // ROW 1
@@ -76,55 +78,6 @@ namespace Tic_Tac_Toe
                     case 2 when o2 == 1: board[2, 1] = 'O'; break;
                     case 2 when o2 == 2: board[2, 2] = 'O'; break;
                 }
-
-
-                Board(board);
-
-
-                // Player X win conditions
-                // Horizontal
-                if ((board[0, 0] == 'X') && (board[0, 1] == 'X') && (board[0, 2] == 'X'))
-                {
-                    Console.WriteLine(xWinMessage);
-                    return;
-                }
-                else if ((board[1, 0] == 'X') && (board[1, 1] == 'X') && (board[1, 2] == 'X'))
-                {
-                    Console.WriteLine(xWinMessage);
-                    return;
-                }
-                else if ((board[2, 0] == 'X') && (board[2, 1] == 'X') && (board[2, 2] == 'X'))
-                {
-                    Console.WriteLine(xWinMessage);
-                    return;
-                }
-                // Vertical
-                else if ((board[0, 0] == 'X') && (board[1, 0] == 'X') && (board[2, 0] == 'X'))
-                {
-                    Console.WriteLine(xWinMessage);
-                    return;
-                }
-                else if ((board[0, 1] == 'X') && (board[1, 1] == 'X') && (board[2, 1] == 'X'))
-                {
-                    Console.WriteLine(xWinMessage);
-                    return;
-                }
-                else if ((board[0, 2] == 'X') && (board[1, 2] == 'X') && (board[2, 2] == 'X'))
-                {
-                    Console.WriteLine(xWinMessage);
-                    return;
-                }
-                // Diagonal
-                else if ((board[0, 0] == 'X') && (board[1, 1] == 'X') && (board[2, 2] == 'X') ||  (board[2, 2] == 'X') && (board[1, 1] == 'X') && (board[0, 0] == 'X'))
-                {
-                    Console.WriteLine(xWinMessage);
-                    return;
-                }
-                else if ((board[0, 2] == 'X') && (board[1, 1] == 'X') && (board[2, 0] == 'X') || (board[2, 0] == 'X') && (board[1, 1] == 'X') && (board[0, 2] == 'X'))
-                {
-                    Console.WriteLine(xWinMessage);
-                    return;
-                }
             }
         }
 
@@ -132,16 +85,67 @@ namespace Tic_Tac_Toe
         
         
         
-        private static void PlayerX(out int x1, out int x2)
+        private static void PlayerX(out int x1, out int x2, char[,] board, string xWinMessage)
         {
+            // Player X winning condition
+            // Horizontal
+            if ((board[0, 0] == 'X') && (board[0, 1] == 'X') && (board[0, 2] == 'X') || 
+                (board[1, 0] == 'X') && (board[1, 1] == 'X') && (board[1, 2] == 'X') ||
+                (board[2, 0] == 'X') && (board[2, 1] == 'X') && (board[2, 2] == 'X'))
+            {
+                Console.WriteLine(xWinMessage);
+                Environment.Exit(1);
+            }
+            // Vertical
+            else if ((board[0, 0] == 'X') && (board[1, 0] == 'X') && (board[2, 0] == 'X') ||
+                     (board[0, 1] == 'X') && (board[1, 1] == 'X') && (board[2, 1] == 'X') ||
+                     (board[0, 2] == 'X') && (board[1, 2] == 'X') && (board[2, 2] == 'X'))
+            {
+                Console.WriteLine(xWinMessage);
+                Environment.Exit(1);
+            }
+            // Diagonal
+            else if ((board[0, 0] == 'X') && (board[1, 1] == 'X') && (board[2, 2] == 'X') ||
+                     (board[0, 2] == 'X') && (board[1, 1] == 'X') && (board[2, 0] == 'X'))
+            {
+                Console.WriteLine(xWinMessage);
+                Environment.Exit(1);
+            }
+
             Console.Write("\n\n-- Player X's turn:   ");
             string[] xInput = Console.ReadLine().Split(' ');
             x1 = int.Parse(xInput[0]);
-            x2 = int.Parse(xInput[1]);
+            x2 = int.Parse(xInput[1]);             
         }
 
-        private static void PlayerO(out int o1, out int o2)
+        
+        private static void PlayerO(out int o1, out int o2, char[,] board, string oWinMessage)
         {
+            // Player O winning condition
+            // Horizontal
+            if ((board[0, 0] == 'O') && (board[0, 1] == 'O') && (board[0, 2] == 'O') ||
+                (board[1, 0] == 'O') && (board[1, 1] == 'O') && (board[1, 2] == 'O') ||
+                (board[2, 0] == 'O') && (board[2, 1] == 'O') && (board[2, 2] == 'O'))
+            {
+                Console.WriteLine(oWinMessage);
+                Environment.Exit(1);
+            }
+            // Vertical
+            else if ((board[0, 0] == 'O') && (board[1, 0] == 'O') && (board[2, 0] == 'O') ||
+                     (board[0, 1] == 'O') && (board[1, 1] == 'O') && (board[2, 1] == 'O') ||
+                     (board[0, 2] == 'O') && (board[1, 2] == 'O') && (board[2, 2] == 'O'))
+            {
+                Console.WriteLine(oWinMessage);
+                Environment.Exit(1);
+            }
+            // Diagonal
+            else if ((board[0, 0] == 'O') && (board[1, 1] == 'O') && (board[2, 2] == 'O') ||  
+                     (board[0, 2] == 'O') && (board[1, 1] == 'O') && (board[2, 0] == 'O'))
+            {
+                Console.WriteLine(oWinMessage);
+                Environment.Exit(1);
+            }
+
             Console.Write("\n\n-- Player O's turn:   ");
             string[] oInput = Console.ReadLine().Split(' ');
             o1 = int.Parse(oInput[0]);
