@@ -20,7 +20,7 @@ namespace Tic_Tac_Toe
             if (userInput == 'y')
                 StartGame();
             else
-                Console.WriteLine("\n\n BYE");
+                Console.WriteLine("\n\n - BYE");
         }
         
         
