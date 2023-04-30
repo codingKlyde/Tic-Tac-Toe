@@ -10,133 +10,124 @@ namespace Tic_Tac_Toe
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine($"{"*** TIC-TAC-TOE ***\n", -30}", Console.ForegroundColor = ConsoleColor.Blue);
-            Console.ResetColor();
+            // 3x3 board
+            const int row = 3, col = 3;
+            char[,] board = new char[row, col];
+            
+            
+            Console.WriteLine($"{"*** TIC-TAC-TOE ***\n"}");
             
             
             Console.Write("[y/n] Start game?   ");
             char userInput = Console.ReadKey().KeyChar;
-            
+
             if (userInput == 'y')
-                StartGame();
+            {
+                while (true)
+                {
+                    Board(board);                                                                                      
+                    PlayerX(board);                                                                                     
+                    WinningCondition(board);                                                
+
+                    Board(board);
+                    PlayerO(board);
+                    WinningCondition(board);
+                }
+            }
             else
                 Console.WriteLine("\n\n - BYE");
         }
         
-        
-        
-        
-        
-        /// <summary>
-        /// Brief description of what the function does.
-        /// </summary>
-        /// <param name="parameterName">Description of the parameter, including any limitations or requirements.</param>
-        /// <returns>Description of the value returned by the function.</returns>
-        private static void StartGame()
-        {
-            const int ROW = 3, COL = 3;
-            
-            char[,] board = new char[ROW, COL];
-    
-            const string xWinMessage = "\n\n-- Player X wins!";
-            const string oWinMessage = "\n\n-- Player O wins!";
-
-            const int z = 0;
-            
-            
-            while (z <= 20)
-            {
-                Board(board);
-                
-                
-                PlayerX(out int x1, out int x2);
-
-                switch (x1)
-                {
-                    // ROW 1
-                    case 0 when x2 == 0: board[0, 0] = 'X'; break;
-                    case 0 when x2 == 1: board[0, 1] = 'X'; break;
-                    case 0 when x2 == 2: board[0, 2] = 'X'; break;
-                    // ROW 2
-                    case 1 when x2 == 0: board[1, 0] = 'X'; break;
-                    case 1 when x2 == 1: board[1, 1] = 'X'; break;
-                    case 1 when x2 == 2: board[1, 2] = 'X'; break;
-                    // ROW 3
-                    case 2 when x2 == 0: board[2, 0] = 'X'; break;
-                    case 2 when x2 == 1: board[2, 1] = 'X'; break;
-                    case 2 when x2 == 2: board[2, 2] = 'X'; break;
-                }
-                
-                WinningCondition(board, xWinMessage, oWinMessage);
-
-                
-                PlayerO(out int o1, out int o2);
-
-                switch (o1)
-                {
-                    // ROW 1
-                    case 0 when o2 == 0: board[0, 0] = 'O'; break;
-                    case 0 when o2 == 1: board[0, 1] = 'O'; break;
-                    case 0 when o2 == 2: board[0, 2] = 'O'; break;
-                    // ROW 2
-                    case 1 when o2 == 0: board[1, 0] = 'O'; break;
-                    case 1 when o2 == 1: board[1, 1] = 'O'; break;
-                    case 1 when o2 == 2: board[1, 2] = 'O'; break;
-                    // ROW 3
-                    case 2 when o2 == 0: board[2, 0] = 'O'; break;
-                    case 2 when o2 == 1: board[2, 1] = 'O'; break;
-                    case 2 when o2 == 2: board[2, 2] = 'O'; break;
-                }
-                
-                WinningCondition(board, xWinMessage, oWinMessage);
-            }
-        }
 
         
         
-        
-        
+   
         // PLAYER X INPUT
-        private static void PlayerX(out int x1, out int x2)
+        private static void PlayerX(char[,] board)
         {
             // Get two inputs separate by space (row, column)
-            Console.Write("\n\n-- Player X's turn:   ");
+            Console.Write("\n-- Player X's turn:   ");
             string[] xInput = Console.ReadLine().Split(' ');
-            x1 = int.Parse(xInput[0]);
-            x2 = int.Parse(xInput[1]);             
+            int x1 = int.Parse(xInput[0]);
+            int x2 = int.Parse(xInput[1]);
+
+            
+            if ((x1 >= 0 && x1 <= 2) && (x2 >= 0 && x2 <= 2))                                                   // Check if the input is between from 1 to 2
+            {
+                if (board[x1, x2] == '\0')                                                                      // Check if the cell is empty
+                {
+                    switch (x1)
+                    {
+                        // ROW 1
+                        case 0 when x2 == 0: board[0, 0] = 'X'; break;
+                        case 0 when x2 == 1: board[0, 1] = 'X'; break;
+                        case 0 when x2 == 2: board[0, 2] = 'X'; break;
+                        // ROW 2
+                        case 1 when x2 == 0: board[1, 0] = 'X'; break;
+                        case 1 when x2 == 1: board[1, 1] = 'X'; break;
+                        case 1 when x2 == 2: board[1, 2] = 'X'; break;
+                        // ROW 3
+                        case 2 when x2 == 0: board[2, 0] = 'X'; break;
+                        case 2 when x2 == 1: board[2, 1] = 'X'; break;
+                        case 2 when x2 == 2: board[2, 2] = 'X'; break;
+                    }
+                }
+                else
+                    Console.WriteLine("\nCell occupied.");
+            }
+            else
+                Console.WriteLine("\nInvalid row or column.");
         }
 
+        
         // PLAYER O INPUT
-        private static void PlayerO(out int o1, out int o2)
+        private static void PlayerO(char[,] board)
         {
             // Get two inputs separate by space (row, column)
-            Console.Write("\n\n-- Player O's turn:   ");
+            Console.Write("\n-- Player O's turn:   ");
             string[] oInput = Console.ReadLine().Split(' ');
-            o1 = int.Parse(oInput[0]);
-            o2 = int.Parse(oInput[1]);
-        }
-        
-        
-        
-        
+            int o1 = int.Parse(oInput[0]);
+            int o2 = int.Parse(oInput[1]);
 
-        // BOARD
-        private static void Board(char[,] board)
-        {
-            Console.WriteLine("\n");
-            Console.WriteLine($"{board[0, 0]} | {board[0, 1]} | {board[0, 2]}");
-            Console.WriteLine("--+---+--");
-            Console.WriteLine($"{board[1, 0]} | {board[1, 1]} | {board[1, 2]}");
-            Console.WriteLine("--+---+--");
-            Console.WriteLine($"{board[2, 0]} | {board[2, 1]} | {board[2, 2]}");
+
+            if ((o1 >= 0 && o1 <= 2) && (o2 >= 0 && o2 <= 2)) 
+            {
+                if (board[o1, o2] == '\0')                                                                            
+                {
+                    switch (o1)
+                    {
+                        // Row 1
+                        case 0 when o2 == 0: board[0, 0] = 'O'; break;
+                        case 0 when o2 == 1: board[0, 1] = 'O'; break;
+                        case 0 when o2 == 2: board[0, 2] = 'O'; break;
+                        // Row 2
+                        case 1 when o2 == 0: board[1, 0] = 'O'; break;
+                        case 1 when o2 == 1: board[1, 1] = 'O'; break;
+                        case 1 when o2 == 2: board[1, 2] = 'O'; break;
+                        // Row 3
+                        case 2 when o2 == 0: board[2, 0] = 'O'; break;
+                        case 2 when o2 == 1: board[2, 1] = 'O'; break;
+                        case 2 when o2 == 2: board[2, 2] = 'O'; break;
+                    }
+                }
+                else
+                    Console.WriteLine("\nCell occupied.");
+            }
+            else
+                Console.WriteLine("\nInvalid row or column.");
         }
 
-        
+
 
 
         // WINNING CONDITION
-        private static void WinningCondition(char[,] board, string xWinMessage, string oWinMessage)
+        private static void WinningCondition(char[,] board)
         {
+            const string xWinMessage = "\n\n-- Player X wins!";
+            const string oWinMessage = "\n\n-- Player O wins!";
+            const string drawMessage = "\n\n-- Draw!";
+            
+            
             // Player X winning condition
             // Horizontal
             if ((board[0, 0] == 'X') && (board[0, 1] == 'X') && (board[0, 2] == 'X') || 
@@ -193,6 +184,32 @@ namespace Tic_Tac_Toe
                 Console.WriteLine(oWinMessage);
                 Environment.Exit(1);
             }
+            
+            // Full
+            if ((board[0, 0]) != '\0' && (board[0, 1]) != '\0' && (board[0, 2]) != '\0' &&
+                (board[1, 0]) != '\0' && (board[1, 1]) != '\0' && (board[1, 2]) != '\0' &&
+                (board[2, 0]) != '\0' && (board[2, 1]) != '\0' && (board[2, 2]) != '\0')
+            {
+                Board(board);
+                Console.WriteLine(drawMessage);
+                Environment.Exit(1);
+            }
+        }
+        
+        
+        
+        
+        
+        // BOARD
+        private static void Board(char[,] board)
+        {
+            // Displays the board
+            Console.WriteLine("\n");
+            Console.WriteLine($"{board[0, 0]} | {board[0, 1]} | {board[0, 2]}");
+            Console.WriteLine("--+---+--");
+            Console.WriteLine($"{board[1, 0]} | {board[1, 1]} | {board[1, 2]}");
+            Console.WriteLine("--+---+--");
+            Console.WriteLine($"{board[2, 0]} | {board[2, 1]} | {board[2, 2]}");
         }
     }
 }
